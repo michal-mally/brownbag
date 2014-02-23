@@ -7,7 +7,7 @@ class UrlMappings {
             }
         }
 
-        "/"(view:"/index")
+        "/"(redirect: [controller: 'idea', action: 'index'])
         "500"(view:'/error')
 	}
 }

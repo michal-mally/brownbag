@@ -14,7 +14,10 @@ class IdeaController {
 
     @Transactional
     def save() {
-        new Idea(request.JSON).save()
+        new Idea(request.JSON).with {
+            creatorId = getUserId()
+            save()
+        }
         render "OK"
     }
 

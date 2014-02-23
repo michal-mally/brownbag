@@ -9,6 +9,7 @@
 <div class="container" ng-controller="IdeaListCtrl">
     <div class="alert alert-{{messageType}}" ng-show="message">{{message}}</div>
     <ul class="list-group" ng-show="!editPanelShown">
+        <div class="alert alert-info" ng-show="ideas.length == 0">Nic tu jeszcze nie ma - dodaj śmiało swoje pomysły!</div>
         <li ng-repeat="idea in ideas | limitTo: ideasShown" class="list-group-item"><a href="#" ng-click="vote(idea.id)" ng-show="!expanded"
                                                                  class="btn btn-success bb-btn-voting">{{idea.votes}} <span
                     class="glyphicon glyphicon-thumbs-up"></span></a> <span

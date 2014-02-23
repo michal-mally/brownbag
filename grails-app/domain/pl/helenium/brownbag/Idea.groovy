@@ -10,6 +10,8 @@ class Idea {
 
     long votes
 
+    String creatorId
+
     static constraints = {
         title blank: false
         location blank: false, url: true

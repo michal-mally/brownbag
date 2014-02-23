@@ -9,11 +9,12 @@
 <div class="container" ng-controller="IdeaListCtrl">
     <div class="alert alert-{{messageType}}" ng-show="message">{{message}}</div>
     <ul class="list-group" ng-show="!editPanelShown">
-        <li ng-repeat="idea in ideas | limitTo: ideasShown" class="list-group-item"><a href="#" ng-click="vote(idea.id)"
+        <li ng-repeat="idea in ideas | limitTo: ideasShown" class="list-group-item"><a href="#" ng-click="vote(idea.id)" ng-show="!expanded"
                                                                  class="btn btn-success bb-btn-voting">{{idea.votes}} <span
                     class="glyphicon glyphicon-thumbs-up"></span></a> <span
                 class="bb-shadow">{{idea.title}}</span> <span
-                class="label label-info">{{idea.duration}} min</span></li>
+                class="label label-info" ng-show="!expanded">{{idea.duration}} min</span><a href="#" class="btn btn-link" ng-click="expanded = !expanded">...</a>
+        <div ng-show="expanded">Link: <a href="{{idea.location}}">{{idea.location}}</a></div></li>
     </ul>
     <div ng-show="!editPanelShown">
         <div class="alert alert-warning" ng-show="ideasShown < ideas.length">Pokazywanie {{ideasShown}} z {{ideas.length}} elementów</div>
@@ -80,8 +81,8 @@
             $scope.saveIdea = function(idea) {
                 $http.post('save', idea).success(function (data) {
                     $scope.loadIdeas();
-                    $scope.editPanelShown = false
-                    $scope.message = "Dodano nowy pomysł"
+                    $scope.editPanelShown = false;
+                    $scope.message = "Dodano nowy pomysł";
                     $scope.messageType = "success"
                 })
             };
@@ -90,11 +91,11 @@
                 if ($scope.ideasShown <= $scope.ideas.length) {
                     $scope.ideasShown += 5;
                 }
-            }
+            };
 
             $scope.showLess = function() {
                 $scope.ideasShown = Math.max($scope.ideasShown - 5, 5)
-            }
+            };
 
             $scope.loadIdeas()
         }

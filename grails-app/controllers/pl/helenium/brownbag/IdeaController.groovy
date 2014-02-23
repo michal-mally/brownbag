@@ -3,21 +3,25 @@ package pl.helenium.brownbag
 class IdeaController {
 
     def index() {
-        [ideaList: Idea.listOrderById()]
+        render view: 'index'
     }
 
-    def create() {
-        [idea: new Idea()]
+//    def create() {
+//        [idea: new Idea()]
+//    }
+
+    def list() {
+        respond Idea.listOrderByVotes(order: 'desc')
     }
 
-    def save(Idea idea) {
-        if (idea.hasErrors()) {
-            render view: 'create', model: [idea: idea]
-            return
-        }
-
-        idea.save()
-        redirect action: 'index'
-    }
+//    def save(Idea idea) {
+//        if (idea.hasErrors()) {
+//            render view: 'create', model: [idea: idea]
+//            return
+//        }
+//
+//        idea.save()
+//        redirect action: 'index'
+//    }
 
 }

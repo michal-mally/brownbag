@@ -80,5 +80,6 @@ grails.project.dependency.resolution = {
         //compile ":handlebars-asset-pipeline:1.0.0.3"
 
         runtime ':twitter-bootstrap:3.1.0'
+        compile ":angularjs-resources:1.2.11"
     }
 }

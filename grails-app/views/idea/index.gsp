@@ -18,13 +18,13 @@
                 $http.get('list.json').success(function(data) {
                     $scope.ideas = data;
                 })
-            }
+            };
 
             $scope.vote = function(id) {
                 $http.post('vote/' + id + '.json').success(function(data) {
                     $scope.loadIdeas()
                 })
-            }
+            };
 
             $scope.loadIdeas()
         }

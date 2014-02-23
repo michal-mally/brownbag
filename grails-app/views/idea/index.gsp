@@ -8,17 +8,27 @@
 <body>
 <div class="container">
     <ul class="list-group" ng-controller="IdeaListCtrl">
-        <li ng-repeat="idea in ideas" class="list-group-item"><a href="#" class="btn btn-success bb-btn-voting">{{idea.votes}} <span
+        <li ng-repeat="idea in ideas" class="list-group-item"><a href="#" ng-click="vote(idea.id)" class="btn btn-success bb-btn-voting">{{idea.votes}} <span
                 class="glyphicon glyphicon-thumbs-up"></span></a> <span class="bb-shadow">{{idea.title}}</span> <span
                 class="label label-info">{{idea.duration}} min</span></li>
     </ul>
     <script>
         function IdeaListCtrl($scope, $http) {
-            $http.get('list.json').success(function(data) {
-                $scope.ideas = data;
-            });
+            $scope.loadIdeas = function() {
+                $http.get('list.json').success(function(data) {
+                    $scope.ideas = data;
+                })
+            }
+
+            $scope.vote = function(id) {
+                $http.post('vote/' + id + '.json').success(function(data) {
+                    $scope.loadIdeas()
+                })
+            }
+
+            $scope.loadIdeas()
         }
-    </script
+    </script>
 </div>
 </body>
 </html>

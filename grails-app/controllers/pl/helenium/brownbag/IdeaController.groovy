@@ -13,6 +13,12 @@ class IdeaController {
     }
 
     @Transactional
+    def save() {
+        new Idea(request.JSON).save()
+        render "OK"
+    }
+
+    @Transactional
     def vote() {
         def userId = getUserId()
         assert userId : "userId mustn't be null!"

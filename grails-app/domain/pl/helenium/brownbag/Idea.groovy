@@ -1,7 +1,5 @@
 package pl.helenium.brownbag
 
-import java.util.concurrent.ThreadLocalRandom
-
 class Idea {
 
     String title
@@ -10,7 +8,7 @@ class Idea {
 
     Long duration
 
-    long votes = ThreadLocalRandom.current().nextInt(0, 100)
+    long votes
 
     static constraints = {
         title blank: false

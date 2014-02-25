@@ -68,19 +68,19 @@
             $scope.ideasShown = 5;
 
             $scope.loadIdeas = function () {
-                $http.get('list.json').success(function (data) {
+                $http.get('<g:createLink controller="idea" action="list" />' + '.json').success(function (data) {
                     $scope.ideas = data;
                 })
             };
 
             $scope.vote = function (id) {
-                $http.post('vote/' + id + '.json').success(function (data) {
+                $http.post('<g:createLink controller="idea" action="vote" />/' + id).success(function (data) {
                     $scope.loadIdeas()
                 })
             };
 
             $scope.saveIdea = function(idea) {
-                $http.post('save', idea).success(function (data) {
+                $http.post('<g:createLink controller="idea" action="save" />', idea).success(function (data) {
                     $scope.loadIdeas();
                     $scope.editPanelShown = false;
                     $scope.message = "Dodano nowy pomysł";

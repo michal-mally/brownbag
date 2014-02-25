@@ -1,37 +1,27 @@
 package pl.helenium.brownbag
 
-import org.bson.types.ObjectId
-
 class IdeaController {
 
+    def ideaService
+
     def index() {
-        render view: 'index'
         linkUserByCookie()
+        render view: 'index'
     }
 
     def list() {
-        respond Idea.list().sort { it.votes.size() }
+        respond ideaService.getAll()
     }
 
     def save() {
-        new Idea(request.JSON).with {
-            creatorId = getUserId()
-            save(validate: true)
-        }
+        def idea = new Idea(request.JSON)
+        idea.creatorId = getUserId()
+        ideaService.create(idea)
         render "OK"
     }
 
     def vote() {
-        def userId = getUserId()
-        assert userId : "userId mustn't be null!"
-
-        def idea = Idea.get(new ObjectId(params.id))
-        assert idea : "idea mustn't be null"
-
-        if (!idea.votes.contains(userId)) {
-            idea.addToVotes(userId)
-            idea.save()
-        }
+        ideaService.vote(params.id, getUserId())
         render "OK"
     }
 

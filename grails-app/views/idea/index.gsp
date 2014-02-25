@@ -9,17 +9,26 @@
 <div class="container" ng-controller="IdeaListCtrl">
     <div class="alert alert-{{messageType}}" ng-show="message">{{message}}</div>
     <ul class="list-group" ng-show="!editPanelShown">
-        <div class="alert alert-info" ng-show="ideas.length == 0">Nic tu jeszcze nie ma - dodaj śmiało swoje pomysły!</div>
-        <li ng-repeat="idea in ideas | limitTo: ideasShown" class="list-group-item"><a href="#" ng-click="vote(idea.id)" ng-show="!expanded"
-                                                                 class="btn btn-success bb-btn-voting">{{idea.votes.length}} <span
+        <div class="alert alert-info"
+             ng-show="ideas.length == 0">Nic tu jeszcze nie ma - dodaj śmiało swoje pomysły!</div>
+        <li ng-repeat="idea in ideas | limitTo: ideasShown" class="list-group-item"><a href="#" ng-click="vote(idea.id)"
+                                                                                       ng-show="!expanded"
+                                                                                       class="btn btn-success bb-btn-voting"
+                                                                                       ng-disabled="hasVoted(idea)">{{idea.votes.length}} <span
                     class="glyphicon glyphicon-thumbs-up"></span></a> <span
                 class="bb-shadow">{{idea.title}}</span> <span
-                class="label label-info" ng-show="!expanded">{{idea.duration}} min</span><a href="#" class="btn btn-link" ng-click="expanded = !expanded">...</a>
-        <div ng-show="expanded">Link: <a href="{{idea.location}}">{{idea.location}}</a></div></li>
+                class="label label-info" ng-show="!expanded">{{idea.duration}} min</span><a href="#"
+                                                                                            class="btn btn-link"
+                                                                                            ng-click="expanded = !expanded">...</a>
+
+            <div ng-show="expanded">Link: <a href="{{idea.location}}">{{idea.location}}</a></div></li>
     </ul>
+
     <div ng-show="!editPanelShown">
-        <div class="alert alert-warning" ng-show="ideasShown < ideas.length">Pokazywanie {{ideasShown}} z {{ideas.length}} elementów</div>
+        <div class="alert alert-warning"
+             ng-show="ideasShown < ideas.length">Pokazywanie {{ideasShown}} z {{ideas.length}} elementów</div>
         <a href="#" class="btn btn-success" ng-click="editPanelShown = true;">Dodaj nowy pomysł...</a>
+
         <div class="btn-group">
             <button type="button" class="btn btn-info" ng-click="showLess()">Pokaż mniej</button>
             <button type="button" class="btn btn-info" ng-click="showMore()">Pokaż więcej</button>
@@ -36,23 +45,29 @@
 
                 <div class="input-group">
                     <span class="input-group-addon"></span>
-                    <input type="text" name="title" class="form-control" placeholder="Tytuł" ng-model="edited.title" ng-minlength="6" maxlength="255" required>
+                    <input type="text" name="title" class="form-control" placeholder="Tytuł" ng-model="edited.title"
+                           ng-minlength="6" maxlength="255" required>
                 </div>
-                <small class="error" ng-show="idea_form.title.$error.minlength">Tytuł musi mieć długość przynajmniej 6 znaków</small>
+                <small class="error"
+                       ng-show="idea_form.title.$error.minlength">Tytuł musi mieć długość przynajmniej 6 znaków</small>
 
                 <div class="input-group">
                     <span class="input-group-addon"></span>
-                    <input type="url" name="location" class="form-control" placeholder="Link" ng-model="edited.location" required>
+                    <input type="url" name="location" class="form-control" placeholder="Link" ng-model="edited.location"
+                           required>
                 </div>
-                <small class="error" ng-show="idea_form.location.$error.url">Link musi być poprawnym adresem internetowym</small>
+                <small class="error"
+                       ng-show="idea_form.location.$error.url">Link musi być poprawnym adresem internetowym</small>
 
                 <div class="input-group">
                     <span class="input-group-addon"></span>
-                    <input type="number" name="duration" class="form-control" placeholder="Czas trwania" ng-model="edited.duration"
+                    <input type="number" name="duration" class="form-control" placeholder="Czas trwania"
+                           ng-model="edited.duration"
                            min="1" max="180" required>
                     <span class="input-group-addon">min</span>
                 </div>
-                <small class="error" ng-show="idea_form.duration.$error.min || idea_form.duration.$error.max">Czas trwania musi być liczbą pomiędzy 1 a 180</small>
+                <small class="error"
+                       ng-show="idea_form.duration.$error.min || idea_form.duration.$error.max">Czas trwania musi być liczbą pomiędzy 1 a 180</small>
             </div>
 
             <div class="panel-footer">
@@ -64,6 +79,12 @@
         </form>
     </div>
     <script>
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+
         function IdeaListCtrl($scope, $http) {
             $scope.ideasShown = 5;
 
@@ -79,7 +100,7 @@
                 })
             };
 
-            $scope.saveIdea = function(idea) {
+            $scope.saveIdea = function (idea) {
                 $http.post('<g:createLink controller="idea" action="save" />', idea).success(function (data) {
                     $scope.loadIdeas();
                     $scope.editPanelShown = false;
@@ -88,14 +109,18 @@
                 })
             };
 
-            $scope.showMore = function() {
+            $scope.showMore = function () {
                 if ($scope.ideasShown <= $scope.ideas.length) {
                     $scope.ideasShown += 5;
                 }
             };
 
-            $scope.showLess = function() {
+            $scope.showLess = function () {
                 $scope.ideasShown = Math.max($scope.ideasShown - 5, 5)
+            };
+
+            $scope.hasVoted = function (idea) {
+                return idea.votes.indexOf(getCookie('userId')) != -1
             };
 
             $scope.loadIdeas()

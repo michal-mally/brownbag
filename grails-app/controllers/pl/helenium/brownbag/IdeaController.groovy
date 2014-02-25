@@ -1,5 +1,6 @@
 package pl.helenium.brownbag
-import grails.transaction.Transactional
+
+import org.bson.types.ObjectId
 
 class IdeaController {
 
@@ -9,34 +10,29 @@ class IdeaController {
     }
 
     def list() {
-        respond Idea.listOrderByVotes(order: 'desc')
+        respond Idea.list().sort { it.votes.size() }
     }
 
-    @Transactional
     def save() {
         new Idea(request.JSON).with {
             creatorId = getUserId()
-            save()
+            save(validate: true)
         }
         render "OK"
     }
 
-    @Transactional
     def vote() {
         def userId = getUserId()
         assert userId : "userId mustn't be null!"
 
-        def idea = Idea.get(params.id)
+        def idea = Idea.get(new ObjectId(params.id))
         assert idea : "idea mustn't be null"
 
-        def vote = Vote.findByIdeaAndUserId(idea, userId)
-        if (!vote) {
-            idea.votes++
-            new Vote(idea: idea, userId: userId).save()
-            render "OK"
-        } else {
-            render "DUPLICATE"
+        if (!idea.votes.contains(userId)) {
+            idea.addToVotes(userId)
+            idea.save()
         }
+        render "OK"
     }
 
     private void linkUserByCookie() {

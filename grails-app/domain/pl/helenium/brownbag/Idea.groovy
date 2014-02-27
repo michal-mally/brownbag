@@ -1,10 +1,6 @@
 package pl.helenium.brownbag
 
-import org.bson.types.ObjectId
-
 class Idea {
-
-    ObjectId id
 
     String title
 

@@ -40,7 +40,7 @@
             <h3 class="panel-title">Dodawanie nowego pomysłu</h3>
         </div>
 
-        <form name="idea_form" novalidate ng-submit="saveIdea(edited)">
+        <form name="idea_form" novalidate ng-submit="addIdea(edited)">
             <div class="panel-body">
 
                 <div class="input-group">
@@ -89,19 +89,19 @@
             $scope.ideasShown = 5;
 
             $scope.loadIdeas = function () {
-                $http.get('<g:createLink controller="idea" action="list" />' + '.json').success(function (data) {
-                    $scope.ideas = data;
+                $http.get('<g:createLink controller="poll" action="show" id="${params.id}"/>.json').success(function (data) {
+                    $scope.ideas = data.ideas;
                 })
             };
 
             $scope.vote = function (id) {
-                $http.post('<g:createLink controller="idea" action="vote" />/' + id).success(function (data) {
+                $http.post('<g:createLink controller="idea" action="vote" id="${params.id}"/>').success(function (data) {
                     $scope.loadIdeas()
                 })
             };
 
-            $scope.saveIdea = function (idea) {
-                $http.post('<g:createLink controller="idea" action="save" />', idea).success(function (data) {
+            $scope.addIdea = function (idea) {
+                $http.post('<g:createLink controller="poll" action="addIdea" id="${params.id}"/>', idea).success(function (data) {
                     $scope.loadIdeas();
                     $scope.editPanelShown = false;
                     $scope.message = "Dodano nowy pomysł";

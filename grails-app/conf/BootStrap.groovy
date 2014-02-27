@@ -17,6 +17,7 @@ class BootStrap {
         }
         JSON.registerObjectMarshaller(Idea) { Idea idea ->
             [
+                    id: idea.id,
                     title: idea.title,
                     location: idea.location,
                     duration: idea.duration,

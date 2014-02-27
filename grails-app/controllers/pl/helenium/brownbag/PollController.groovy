@@ -4,12 +4,15 @@ import org.bson.types.ObjectId
 
 class PollController {
 
-    def index() {
+    def pollService
 
+    def index() {
+        linkUserByCookie()
+        render view: 'index'
     }
 
     def create() {
-        def poll = new Poll().save(flush: true, failOnError: true)
+        def poll = pollService.create()
         redirect action: 'show', id: poll.id.toStringMongod()
     }
 
@@ -24,12 +27,23 @@ class PollController {
     }
 
     def addIdea() {
-        def poll = Poll.get(new ObjectId(params.id))
-        def idea = new Idea(request.JSON)
-        poll.addToIdeas(idea)
-        poll.save()
-
+        pollService.addIdea(params.id, new Idea(request.JSON))
         render "OK"
+    }
+
+    def voteIdea() {
+        pollService.voteIdea(params.id, request.JSON.ideaId, getUserId())
+        render "OK"
+    }
+
+    private void linkUserByCookie() {
+        if(!getUserId()) {
+            response.setCookie('userId', getUserId())
+        }
+    }
+
+    private String getUserId() {
+        request.getCookie('userId')
     }
 
 }

@@ -78,54 +78,6 @@
             </div>
         </form>
     </div>
-    <script>
-        function getCookie(name) {
-            var value = "; " + document.cookie;
-            var parts = value.split("; " + name + "=");
-            if (parts.length == 2) return parts.pop().split(";").shift();
-        }
-
-        function IdeaListCtrl($scope, $http) {
-            $scope.ideasShown = 5;
-
-            $scope.loadIdeas = function () {
-                $http.get('<g:createLink controller="poll" action="show" id="${params.id}"/>.json').success(function (data) {
-                    $scope.ideas = data.ideas;
-                })
-            };
-
-            $scope.voteIdea = function (id) {
-                $http.post('<g:createLink controller="poll" action="voteIdea" id="${params.id}"/>', {ideaId: id}).success(function (data) {
-                    $scope.loadIdeas()
-                })
-            };
-
-            $scope.addIdea = function (idea) {
-                $http.post('<g:createLink controller="poll" action="addIdea" id="${params.id}"/>', idea).success(function (data) {
-                    $scope.loadIdeas();
-                    $scope.editPanelShown = false;
-                    $scope.message = "Dodano nowy pomysł";
-                    $scope.messageType = "success"
-                })
-            };
-
-            $scope.showMore = function () {
-                if ($scope.ideasShown <= $scope.ideas.length) {
-                    $scope.ideasShown += 5;
-                }
-            };
-
-            $scope.showLess = function () {
-                $scope.ideasShown = Math.max($scope.ideasShown - 5, 5)
-            };
-
-            $scope.hasVoted = function (idea) {
-                return idea.votes.indexOf(getCookie('userId')) != -1
-            };
-
-            $scope.loadIdeas()
-        }
-    </script>
 </div>
 </body>
 </html>

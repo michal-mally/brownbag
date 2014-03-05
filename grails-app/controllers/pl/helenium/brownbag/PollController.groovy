@@ -38,6 +38,12 @@ class PollController {
         }
 
         log.info "User not logged in"
+        if (actionName in ['index', 'show']) {
+            log.info("It is OK not to be logged in for action: $actionName")
+            return
+        }
+
+        throw new RuntimeException("User has to be logged in for action: ${actionName}")
     }
 
     def index() {

@@ -1,10 +1,8 @@
 package pl.helenium.brownbag
 
-import org.bson.types.ObjectId
-
 class Idea {
 
-    ObjectId id
+    String id
 
     String title
 
@@ -12,7 +10,7 @@ class Idea {
 
     Long duration
 
-    String creatorId
+    UserId creator
 
     Set votes = []
 
@@ -22,6 +20,8 @@ class Idea {
         duration min: 1L
     }
 
-    static hasMany = [votes: String]
+    static hasMany = [votes: UserId]
+
+    static embedded = ['votes']
 
 }

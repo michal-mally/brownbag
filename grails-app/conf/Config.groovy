@@ -1,3 +1,5 @@
+import org.scribe.builder.api.GoogleApi
+
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
@@ -112,4 +114,18 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+}
+
+oauth {
+    providers {
+        google {
+            api = GoogleApi
+            key = System.getenv("GOOGLE_OAUTH_KEY")
+            secret = System.getenv("GOOGLE_OAUTH_SECRET")
+            scope = 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
+            callback = "${System.getenv("APP_URL")}/oauth/google/callback"
+            successUri = "/"
+        }
+    }
+    debug = true
 }

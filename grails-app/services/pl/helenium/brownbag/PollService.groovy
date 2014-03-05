@@ -1,7 +1,5 @@
 package pl.helenium.brownbag
 
-import org.bson.types.ObjectId
-
 class PollService {
 
     Poll create() {
@@ -9,18 +7,20 @@ class PollService {
     }
 
     void addIdea(String pollId, Idea idea) {
-        def poll = Poll.get(new ObjectId(pollId))
-        idea.id = new ObjectId()
+        def poll = Poll.findById(pollId)
+        idea.id = UUID.randomUUID().toString()
         poll.addToIdeas(idea)
         poll.save()
     }
 
-    void voteIdea(String pollId, String ideaId, String userId) {
-        def poll = Poll.get(new ObjectId(pollId))
-        def idea = poll.ideas.find { it.id == new ObjectId(ideaId) }
+    void voteIdea(String pollId, String ideaId, User user) {
+        def poll = Poll.findById(pollId)
+        Idea idea = poll.ideas.find { it.id == ideaId }
         assert idea : "idea mustn't be null"
 
-        if (!idea.votes.contains(userId)) {
+        def userId = new UserId(name: user.name)
+        userId.id = user.providerId
+        if (idea.votes.every() { it.id != userId.id}) {
             idea.addToVotes(userId)
             poll.$changedProperties['ideas'] = true
             poll.save(flush: true, failOnError: true)

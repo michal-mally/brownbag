@@ -6,9 +6,9 @@
 </head>
 
 <body>
-    <div class="container">
-        <g:link action="create" class="btn btn-success btn-lg">Dodaj nowe głosowanie</g:link>
+    <div class="container" ng-controller="PollsCtrl">
+        <g:link action="create" class="btn btn-success btn-lg" ng-show="user.name">Dodaj nowe głosowanie</g:link>
+        <oauth:connect provider="google" class="btn btn-danger btn-lg" ng-hide="user.name">Zaloguj się przez Google</oauth:connect>
     </div>
-</div>
 </body>
 </html>

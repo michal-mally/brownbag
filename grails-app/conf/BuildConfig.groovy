@@ -40,6 +40,7 @@ grails.project.dependency.resolution = {
         mavenLocal()
         grailsCentral()
         mavenCentral()
+        mavenRepo "http://repo.desirableobjects.co.uk/"
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -84,6 +85,7 @@ grails.project.dependency.resolution = {
         compile ":angularjs-resources:1.2.11"
         compile ':cookie:0.51'
         compile ":mongodb:1.3.3"
+        runtime ':oauth:2.2.1'
     }
 
 }

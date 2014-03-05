@@ -1,13 +1,17 @@
 package pl.helenium.brownbag
 
-import org.bson.types.ObjectId
-
 class Poll {
 
-    ObjectId id
+    String id
+
+    Set ideas = []
 
     static hasMany = [ideas: Idea]
 
     static embedded = ['ideas']
+
+    static mapping = {
+        version false
+    }
 
 }

@@ -1,14 +1,11 @@
 import grails.converters.JSON
-import org.bson.types.ObjectId
 import pl.helenium.brownbag.Idea
 import pl.helenium.brownbag.Poll
+import pl.helenium.brownbag.UserId
 
 class BootStrap {
 
     def init = { servletContext ->
-        JSON.registerObjectMarshaller(ObjectId) {
-            it.toStringMongod()
-        }
         JSON.registerObjectMarshaller(Poll) { Poll poll ->
             [
                     id: poll.id,
@@ -22,6 +19,12 @@ class BootStrap {
                     location: idea.location,
                     duration: idea.duration,
                     votes: idea.votes
+            ]
+        }
+        JSON.registerObjectMarshaller(UserId) { UserId userId ->
+            [
+                    id: userId.id,
+                    name: userId.name
             ]
         }
     }

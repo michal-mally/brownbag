@@ -5,3 +5,17 @@ brownbag.service('authService', function ($http) {
         }
     }
 });
+
+brownbag.service('pollService', function ($http) {
+    return {
+        getPoll: function (pollId) {
+            return $http.get(_contextPath + '/' + pollId + '.json')
+        },
+        addIdea: function(pollId, idea) {
+            return $http.post(_contextPath + '/poll/addIdea/' + pollId, idea)
+        },
+        voteIdea: function (pollId, ideaId) {
+            return $http.post(_contextPath + '/poll/voteIdea/' + pollId, {ideaId: ideaId})
+        }
+    }
+});

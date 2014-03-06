@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<div class="container" ng-controller="IdeaListCtrl">
+<div class="container" ng-controller="PollCtrl">
     <div class="alert alert-{{messageType}}" ng-show="message">{{message}}</div>
     <ul class="list-group" ng-show="!editPanelShown">
         <div class="alert alert-info"

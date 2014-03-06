@@ -1,12 +1,7 @@
-brownbag.service('authService', function($http) {
-    var getLoggedInUser = function(scope) {
-        $http.get(_contextPath + '/auth/user.json').success(function(data) {
-                scope.user = data
-            }
-        )
-    };
-
+brownbag.service('authService', function ($http) {
     return {
-        getLoggedInUser: getLoggedInUser
+        getLoggedInUser: function () {
+            return $http.get(_contextPath + '/auth/user.json')
+        }
     }
 });

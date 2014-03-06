@@ -40,5 +40,7 @@ brownbag.controller('IdeaListCtrl', function($scope, $http) {
 });
 
 brownbag.controller('PollsCtrl', function($scope, authService) {
-    authService.getLoggedInUser($scope)
+    authService.getLoggedInUser().success(function(data) {
+        $scope.user = data;
+    });
 });

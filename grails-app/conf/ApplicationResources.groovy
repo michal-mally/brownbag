@@ -4,6 +4,8 @@ modules = {
     }
     brownbag {
         dependsOn 'angular'
-        resource url: 'js/services.js'
+        resource url: 'js/angular/modules.js'
+        resource url: 'js/angular/services.js'
+        resource url: 'js/angular/controllers.js'
     }
 }

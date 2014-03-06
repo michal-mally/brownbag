@@ -1,17 +1,4 @@
-angular.module("brownbag", []);
-
-angular.module("brownbag").service('authService', function($http) {
-    var getLoggedInUser = function(scope) {
-        $http.get(_contextPath + '/auth/user.json').success(function(data) {
-                scope.user = data
-            }
-        )
-    };
-
-    return {
-        getLoggedInUser: getLoggedInUser
-    }
-}).controller('IdeaListCtrl', function($scope, $http) {
+brownbag.controller('IdeaListCtrl', function($scope, $http) {
     $scope.ideasShown = 5;
 
     $scope.loadIdeas = function () {
@@ -50,6 +37,8 @@ angular.module("brownbag").service('authService', function($http) {
     };
 
     $scope.loadIdeas();
-}).controller('PollsCtrl', function($scope, authService) {
+});
+
+brownbag.controller('PollsCtrl', function($scope, authService) {
     authService.getLoggedInUser($scope)
 });

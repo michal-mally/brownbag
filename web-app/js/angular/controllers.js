@@ -23,13 +23,7 @@ brownbag.controller('IdeaListCtrl', function($scope, $http) {
     };
 
     $scope.showMore = function () {
-        if ($scope.ideasShown <= $scope.ideas.length) {
-            $scope.ideasShown += 5;
-        }
-    };
-
-    $scope.showLess = function () {
-        $scope.ideasShown = Math.max($scope.ideasShown - 5, 5)
+        $scope.ideasShown += 5;
     };
 
     $scope.hasVoted = function (idea) {

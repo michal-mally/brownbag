@@ -29,10 +29,7 @@
              ng-show="ideasShown < ideas.length">Pokazywanie {{ideasShown}} z {{ideas.length}} elementów</div>
         <a href="#" class="btn btn-success" ng-click="editPanelShown = true;">Dodaj nowy pomysł...</a>
 
-        <div class="btn-group">
-            <button type="button" class="btn btn-info" ng-click="showLess()">Pokaż mniej</button>
-            <button type="button" class="btn btn-info" ng-click="showMore()">Pokaż więcej</button>
-        </div>
+        <a href="#" class="btn btn-info" ng-click="showMore()" ng-disabled="ideasShown >= ideas.length">Pokaż więcej</a>
     </div>
 
     <div class="panel panel-info" ng-show="editPanelShown">

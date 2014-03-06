@@ -12,29 +12,29 @@ class PollService {
                 [
                         $addToSet: [
                                 ideas: [
-                                        _id: UUID.randomUUID().toString(),
-                                        title: idea.title,
+                                        _id     : UUID.randomUUID().toString(),
+                                        title   : idea.title,
                                         location: idea.location,
                                         duration: idea.duration,
-                                        creator: idea.creator,
-                                        votes: idea.votes,
+                                        creator : idea.creator,
+                                        votes   : idea.votes,
                                 ]
                         ]
                 ])
     }
 
     void voteIdea(String pollId, String ideaId, User user) {
-        def poll = Poll.findById(pollId)
-        Idea idea = poll.ideas.find { it.id == ideaId }
-        assert idea: "idea mustn't be null"
-
-        def userId = new UserId(name: user.name)
-        userId.id = user.providerId
-        if (idea.votes.every() { it.id != userId.id }) {
-            idea.addToVotes(userId)
-            poll.$changedProperties['ideas'] = true
-            poll.save(flush: true, failOnError: true)
-        }
+        Poll.collection.update(
+                [_id: pollId, 'ideas._id': ideaId],
+                [
+                        $addToSet: [
+                                'ideas.$.votes': [
+                                        _id : user.providerId,
+                                        name: user.name
+                                ]
+                        ]
+                ]
+        )
     }
 
 }

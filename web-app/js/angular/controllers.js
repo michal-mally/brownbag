@@ -1,16 +1,16 @@
-brownbag.controller('PollListCtrl', function($scope, $location, authService, pollService) {
-    authService.getLoggedInUser().success(function(data) {
+brownbag.controller('PollListCtrl', function ($scope, $location, authService, pollService) {
+    authService.getLoggedInUser().success(function (data) {
         $scope.user = data;
     });
 
-    $scope.createPoll = function() {
+    $scope.createPoll = function () {
         pollService.createPoll().success(function (pollId) {
             $location.path('/' + pollId);
         });
     };
 });
 
-brownbag.controller('PollCtrl', function($scope, $http, $location, $routeParams, pollService) {
+brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams, pollService) {
     $scope.ideasShown = 5;
     $scope.pollId = $routeParams.pollId;
 
@@ -20,13 +20,8 @@ brownbag.controller('PollCtrl', function($scope, $http, $location, $routeParams,
         });
     };
 
-    $scope.addIdea = function (idea) {
-        pollService.addIdea($scope.pollId, idea).success(function (data) {
-            $scope.loadIdeas();
-            $scope.editPanelShown = false;
-            $scope.message = "Dodano nowy pomysł";
-            $scope.messageType = "success"
-        });
+    $scope.addIdea = function () {
+        $location.path($location.path() + '/idea/create');
     };
 
     $scope.voteIdea = function (ideaId) {
@@ -44,4 +39,18 @@ brownbag.controller('PollCtrl', function($scope, $http, $location, $routeParams,
     };
 
     $scope.loadIdeas();
+});
+
+brownbag.controller('IdeaCtrl', function ($scope, $routeParams, $location, pollService) {
+    $scope.pollId = $routeParams.pollId;
+
+    $scope.create = function (idea) {
+        pollService.addIdea($scope.pollId, idea).success(function (data) {
+            $location.path('/' + $scope.pollId);
+        });
+    };
+
+    $scope.cancel = function () {
+        $location.path('/' + $scope.pollId);
+    };
 });

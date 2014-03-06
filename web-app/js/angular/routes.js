@@ -7,5 +7,8 @@ brownbag.config(function ($routeProvider) {
             controller: 'PollCtrl',
             templateUrl: 'template/show/poll'
         }
-    );
+    ).when('/:pollId/idea/create', {
+            controller: 'IdeaCtrl',
+            templateUrl: 'template/show/ideaCreate'
+        });
 });

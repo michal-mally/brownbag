@@ -10,7 +10,7 @@ brownbag.controller('PollListCtrl', function ($scope, $location, authService, po
     };
 });
 
-brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams, pollService) {
+brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams, pollService, authService) {
     $scope.ideasShown = 5;
     $scope.pollId = $routeParams.pollId;
 
@@ -35,10 +35,19 @@ brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams
     };
 
     $scope.hasVoted = function (idea) {
-        return idea.votes.indexOf(getCookie('userId')) != -1
+        for(var i = 0; i < idea.votes.length; i++) {
+            if(idea.votes[i].id == $scope.user.providerId) {
+                return true;
+            }
+        }
+
+        return false;
     };
 
     $scope.loadIdeas();
+    authService.getLoggedInUser().success(function(data) {
+        $scope.user = data
+    });
 });
 
 brownbag.controller('IdeaCtrl', function ($scope, $routeParams, $location, pollService) {

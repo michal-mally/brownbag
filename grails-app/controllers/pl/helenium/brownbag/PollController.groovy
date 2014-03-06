@@ -58,8 +58,8 @@ class PollController {
         respond(Poll.get(params.id))
     }
 
-    def addIdea() {
-        pollService.addIdea(params.id, new Idea(request.JSON))
+    def createIdea() {
+        pollService.createIdea(params.id, new Idea(request.JSON))
         render "OK"
     }
 

@@ -19,7 +19,7 @@
 <div>
     <div class="alert alert-warning"
          ng-show="ideasShown < ideas.length">Pokazywanie {{ideasShown}} z {{ideas.length}} elementów</div>
-    <a href="" class="btn btn-success" ng-click="addIdea()">Dodaj nowy pomysł...</a>
+    <a href="" class="btn btn-success" ng-click="createIdea()">Dodaj nowy pomysł...</a>
 
     <a href="" class="btn btn-info" ng-click="showMore()" ng-disabled="ideasShown >= ideas.length">Pokaż więcej</a>
 </div>

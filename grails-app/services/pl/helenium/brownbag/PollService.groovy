@@ -6,7 +6,7 @@ class PollService {
         new Poll().save(flush: true, failOnError: true)
     }
 
-    void addIdea(String pollId, Idea idea) {
+    void createIdea(String pollId, Idea idea) {
         def poll = Poll.findById(pollId)
         idea.id = UUID.randomUUID().toString()
         poll.addToIdeas(idea)

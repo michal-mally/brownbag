@@ -8,7 +8,6 @@ class UrlMappings {
         }
 
         "/"(controller: 'poll', action: 'index')
-        "/$id(.$format)?"(controller: 'poll', action: 'show')
         "500"(view:'/error')
 	}
 

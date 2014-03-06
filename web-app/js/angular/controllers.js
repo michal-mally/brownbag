@@ -20,7 +20,7 @@ brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams
         });
     };
 
-    $scope.addIdea = function () {
+    $scope.createIdea = function () {
         $location.path($location.path() + '/idea/create');
     };
 
@@ -45,7 +45,7 @@ brownbag.controller('IdeaCtrl', function ($scope, $routeParams, $location, pollS
     $scope.pollId = $routeParams.pollId;
 
     $scope.create = function (idea) {
-        pollService.addIdea($scope.pollId, idea).success(function (data) {
+        pollService.createIdea($scope.pollId, idea).success(function (data) {
             $location.path('/' + $scope.pollId);
         });
     };

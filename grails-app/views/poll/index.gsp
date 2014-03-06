@@ -7,7 +7,7 @@
 
 <body>
     <div class="container">
-        <ng-view></ng-view>
+        <div ng-view></div>
     </div>
 </body>
 </html>

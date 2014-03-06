@@ -51,18 +51,11 @@ class PollController {
     }
 
     def create() {
-        def poll = pollService.create()
-        redirect action: 'show', id: poll.id
+        render pollService.create().id
     }
 
     def show() {
-        assert params.id
-
-        withFormat {
-            html {
-                render view: 'show'
-            }
-        } ?: respond(Poll.get(params.id))
+        respond(Poll.get(params.id))
     }
 
     def addIdea() {

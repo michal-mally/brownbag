@@ -8,6 +8,9 @@ brownbag.service('authService', function ($http) {
 
 brownbag.service('pollService', function ($http) {
     return {
+        createPoll: function() {
+            return $http.post(_contextPath + '/poll/create.json')
+        },
         getPoll: function (pollId) {
             return $http.get(_contextPath + '/' + pollId + '.json')
         },

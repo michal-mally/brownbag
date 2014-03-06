@@ -6,9 +6,8 @@
 </head>
 
 <body>
-    <div class="container" ng-controller="HomeCtrl">
-        <g:link action="create" class="btn btn-success btn-lg" ng-show="user.name">Dodaj nowe głosowanie</g:link>
-        <oauth:connect provider="google" class="btn btn-danger btn-lg" ng-hide="user.name">Zaloguj się przez Google</oauth:connect>
+    <div class="container">
+        <ng-view></ng-view>
     </div>
 </body>
 </html>

@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'brownbag.css')}" type="text/css">
     <script type="text/javascript">
         var _contextPath = "${request.contextPath}";
-        var _pollId = "${params.id}"
     </script>
     <r:require modules="bootstrap"/>
     <r:require modules="brownbag"/>

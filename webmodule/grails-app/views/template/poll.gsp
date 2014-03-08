@@ -9,8 +9,8 @@
             class="bb-shadow">{{idea.title}}</span> <span
             class="label label-info" ng-show="!expanded">{{idea.duration}} min</span>
         <a href="" class="btn btn-link pull-right" ng-click="expanded = !expanded">
-            <span ng-show="expanded" class="glyphicon glyphicon glyphicon-chevron-down"></span>
-            <span ng-hide="expanded" class="glyphicon glyphicon glyphicon-chevron-up"></span>
+            <span ng-hide="expanded" class="glyphicon glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="expanded" class="glyphicon glyphicon glyphicon-chevron-up"></span>
         </a>
 
         <div ng-show="expanded">Link: <a href="{{idea.location}}">{{idea.location}}</a></div></li>

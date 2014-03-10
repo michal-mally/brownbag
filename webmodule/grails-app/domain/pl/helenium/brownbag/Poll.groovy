@@ -4,6 +4,8 @@ class Poll {
 
     String id
 
+    UserId creator
+
     Set ideas = []
 
     static hasMany = [ideas: Idea]

@@ -14,6 +14,12 @@ class User {
 
     String lastname
 
+    Set pollActivities = []
+
+    static hasMany = [
+            pollActivities: PollActivity
+    ]
+
     static mapping = {
         version false
     }

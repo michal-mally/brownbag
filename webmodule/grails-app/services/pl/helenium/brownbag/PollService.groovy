@@ -2,8 +2,30 @@ package pl.helenium.brownbag
 
 class PollService {
 
-    Poll create() {
-        new Poll().save(flush: true, failOnError: true)
+    String create(User user) {
+        def pollId = UUID.randomUUID().toString()
+        Poll.collection.insert(
+                [
+                        _id    : pollId,
+                        creator: [
+                                _id : user.id,
+                                name: user.name,
+                        ]
+                ]
+        )
+        User.collection.update(
+                [
+                        _id: user.id
+                ],
+                [
+                        $addToSet: [
+                                pollActivities: [
+                                        _id: pollId
+                                ]
+                        ]
+                ]
+        )
+        pollId
     }
 
     void createIdea(String pollId, Idea idea) {

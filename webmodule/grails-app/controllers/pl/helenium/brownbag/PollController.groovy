@@ -51,7 +51,7 @@ class PollController {
     }
 
     def create() {
-        render pollService.create().id
+        render pollService.create(session.user)
     }
 
     def show() {

@@ -17,6 +17,10 @@ brownbag.controller('AuthCtrl', function ($scope, authService) {
 });
 
 brownbag.controller('PollListCtrl', function ($scope, $location, authService, pollService) {
+    pollService.getPollActivities().success(function(data) {
+        $scope.pollActivities = data;
+    });
+
     $scope.createPoll = function () {
         pollService.createPoll().success(function (poll) {
             $location.path('/' + poll.id);

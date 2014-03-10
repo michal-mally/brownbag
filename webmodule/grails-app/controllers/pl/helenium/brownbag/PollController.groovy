@@ -77,7 +77,7 @@ class PollController {
     }
 
     def showPollActivity() {
-        respond session.user?.pollActivities
+        respond User.findById(session.user.id).pollActivities
     }
 
 }

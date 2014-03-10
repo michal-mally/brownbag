@@ -6,4 +6,10 @@ class PollActivity {
 
     long lastTime
 
+    Set types = []
+
+    static hasMany = [
+            types: String
+    ]
+
 }

@@ -10,6 +10,8 @@ class PollController {
 
     def authService
 
+    def activityService
+
     def beforeInterceptor = {
         if (session.user) {
             log.info "User already in session: $session.user"
@@ -51,20 +53,26 @@ class PollController {
     }
 
     def create() {
-        render pollService.create(session.user)
+        def poll = pollService.create(session.user)
+        activityService.record(session.user, poll.id, 'create')
+        respond poll
     }
 
     def show() {
-        respond(Poll.get(params.id))
+        def poll = Poll.findById(params.id)
+        activityService.record(session.user, poll.id, 'show')
+        respond poll
     }
 
     def createIdea() {
         pollService.createIdea(params.id, new Idea(request.JSON))
+        activityService.record(session.user, params.id, 'createIdea')
         render "OK"
     }
 
     def voteIdea() {
         pollService.voteIdea(params.id, request.JSON.ideaId, session.user)
+        activityService.record(session.user, params.id, 'voteIdea')
         render "OK"
     }
 

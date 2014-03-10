@@ -14,4 +14,8 @@ class User {
 
     String lastname
 
+    static mapping = {
+        version false
+    }
+
 }

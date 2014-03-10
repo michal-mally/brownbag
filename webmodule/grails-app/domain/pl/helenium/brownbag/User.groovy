@@ -10,4 +10,8 @@ class User {
 
     String name
 
+    String firstname
+
+    String lastname
+
 }

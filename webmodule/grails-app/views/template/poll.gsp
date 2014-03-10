@@ -1,4 +1,3 @@
-<div class="alert alert-{{messageType}}" ng-show="message">{{message}}</div>
 <div class="alert alert-info" ng-show="ideas.length == 0">Nic tu jeszcze nie ma - dodaj śmiało swoje pomysły!</div>
 <ul class="list-group">
     <li ng-repeat="idea in ideas | orderBy:'votes.length':true | limitTo: ideasShown" class="list-group-item"><a

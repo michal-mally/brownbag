@@ -20,7 +20,8 @@ class PollService {
                 [
                         $addToSet: [
                                 pollActivities: [
-                                        _id: pollId
+                                        _id     : pollId,
+                                        lastTime: new Date().time
                                 ]
                         ]
                 ]
@@ -56,9 +57,9 @@ class PollService {
                                         name: user.name
                                 ]
                         ],
-                        $set: [
+                        $set     : [
                                 'ideas.$.lastVoteTime': new Date().time
-                                ]
+                        ]
                 ])
     }
 

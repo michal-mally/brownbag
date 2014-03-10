@@ -4,4 +4,6 @@ class PollActivity {
 
     String id
 
+    long lastTime
+
 }

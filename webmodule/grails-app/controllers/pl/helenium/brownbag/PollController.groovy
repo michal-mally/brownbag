@@ -76,4 +76,8 @@ class PollController {
         render "OK"
     }
 
+    def showPollActivity() {
+        respond session.user?.pollActivities
+    }
+
 }

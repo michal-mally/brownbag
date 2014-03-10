@@ -20,6 +20,8 @@ class User {
             pollActivities: PollActivity
     ]
 
+    static embedded = ['pollActivities']
+
     static mapping = {
         version false
     }

@@ -12,4 +12,6 @@ class PollActivity {
             types: String
     ]
 
+    static embedded = ['types']
+
 }

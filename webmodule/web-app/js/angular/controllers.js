@@ -1,8 +1,22 @@
-brownbag.controller('PollListCtrl', function ($scope, $location, authService, pollService) {
-    authService.getLoggedInUser().success(function (data) {
-        $scope.user = data;
+brownbag.controller('AuthCtrl', function ($scope, authService) {
+    $scope.user = null;
+
+    authService.getLoggedInUser().success(function(data) {
+        if (data != 'null') {
+            $scope.user = data;
+        } else {
+            $scope.user = null;
+        }
     });
 
+    $scope.logout = function() {
+        authService.logout().success(function(data) {
+            $scope.user = null;
+        });
+    };
+});
+
+brownbag.controller('PollListCtrl', function ($scope, $location, authService, pollService) {
     $scope.createPoll = function () {
         pollService.createPoll().success(function (pollId) {
             $location.path('/' + pollId);
@@ -45,9 +59,6 @@ brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams
     };
 
     $scope.loadIdeas();
-    authService.getLoggedInUser().success(function(data) {
-        $scope.user = data
-    });
 });
 
 brownbag.controller('IdeaCtrl', function ($scope, $routeParams, $location, pollService) {

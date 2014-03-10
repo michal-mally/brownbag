@@ -16,14 +16,35 @@
 </head>
 
 <body>
-<div class="navbar navbar-fixed-top navbar-inverse">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Brown Bag</a>
+<div ng-controller="AuthCtrl">
+    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#brownbag-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Brown Bag</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="brownbag-navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-show="user"><a href="" ng-click="logout()">{{user.name}} <span class="glyphicon glyphicon-log-out"></span></a></li>
+                    <li ng-hide="user"><oauth:connect provider="google">Logowanie Google</oauth:connect></li>
+                </ul>
+            </div>
         </div>
+    </nav>
+    <div class="container">
+        <div ng-hide="user" class="alert alert-danger">
+            Zaloguj się by korzystać ze wszystkich funckji aplikacji.
+        </div>
+
+        <g:layoutBody/>
     </div>
+    <r:layoutResources/>
 </div>
-<g:layoutBody/>
-<r:layoutResources/>
 </body>
 </html>

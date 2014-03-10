@@ -1,9 +1,16 @@
 brownbag.service('authService', function ($http) {
+    var getLoggedInUser = function () {
+        return $http.get(_contextPath + '/auth/user.json');
+    };
+
+    var logout = function() {
+        return $http.post(_contextPath + '/auth/logout');
+    };
+
     return {
-        getLoggedInUser: function () {
-            return $http.get(_contextPath + '/auth/user.json')
-        }
-    }
+        getLoggedInUser: getLoggedInUser,
+        logout: logout
+    };
 });
 
 brownbag.service('pollService', function ($http) {

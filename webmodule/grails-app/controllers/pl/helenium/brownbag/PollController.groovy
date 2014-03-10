@@ -19,7 +19,7 @@ class PollController {
         def userIdCookie = request.getCookie('userId')
         if (userIdCookie) {
             log.info "User id cookie: ${userIdCookie}"
-            def user = User.findById(userIdCookie)
+            def user = User.findByBrownbagId(userIdCookie)
             if (user) {
                 session.user = user
                 return
@@ -33,7 +33,7 @@ class PollController {
         if (accessToken) {
             log.info "User not in session but Google Access Token: $accessToken"
             session.user = authService.registerUser(accessToken.token)
-            response.setCookie('userId', session.user.id)
+            response.setCookie('userId', session.user.brownbagId)
             return
         }
 

@@ -30,7 +30,7 @@ class PollService {
                 [
                         $addToSet: [
                                 'ideas.$.votes': [
-                                        _id : user.providerId,
+                                        _id : user.id,
                                         name: user.name
                                 ]
                         ],

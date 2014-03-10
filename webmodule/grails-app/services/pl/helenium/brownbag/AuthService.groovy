@@ -9,13 +9,21 @@ class AuthService {
         log.info """Data retrieved for token = ${token}:
 ${text}"""
         def json = JSON.parse(text)
-        new User(
-                providerId: json.id,
-                email: json.email,
-                name: json.name,
-                firstname: json.given_name,
-                lastname: json.family_name,
-        ).save(flush: true, failOnError: true)
+        User.collection.update(
+                [
+                        _id: json.id
+                ],
+                [
+                        _id: json.id,
+                        brownbagId: UUID.randomUUID().toString(),
+                        email     : json.email,
+                        name      : json.name,
+                        firstname : json.given_name,
+                        lastname  : json.family_name,
+                ],
+                true
+        )
+        User.findById(json.id)
     }
 
 }

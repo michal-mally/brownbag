@@ -4,7 +4,7 @@ class User {
 
     String id
 
-    String providerId
+    String brownbagId
 
     String email
 

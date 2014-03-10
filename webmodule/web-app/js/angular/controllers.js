@@ -50,7 +50,7 @@ brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams
 
     $scope.hasVoted = function (idea) {
         for(var i = 0; i < idea.votes.length; i++) {
-            if(idea.votes[i].id == $scope.user.providerId) {
+            if(idea.votes[i].id == $scope.user.id) {
                 return true;
             }
         }

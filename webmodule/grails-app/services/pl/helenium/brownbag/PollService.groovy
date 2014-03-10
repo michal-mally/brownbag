@@ -12,12 +12,13 @@ class PollService {
                 [
                         $addToSet: [
                                 ideas: [
-                                        _id     : UUID.randomUUID().toString(),
-                                        title   : idea.title,
-                                        location: idea.location,
-                                        duration: idea.duration,
-                                        creator : idea.creator,
-                                        votes   : idea.votes,
+                                        _id         : UUID.randomUUID().toString(),
+                                        title       : idea.title,
+                                        location    : idea.location,
+                                        duration    : idea.duration,
+                                        creator     : idea.creator,
+                                        votes       : idea.votes,
+                                        lastVoteTime: new Date().time,
                                 ]
                         ]
                 ])
@@ -32,9 +33,11 @@ class PollService {
                                         _id : user.providerId,
                                         name: user.name
                                 ]
-                        ]
-                ]
-        )
+                        ],
+                        $set: [
+                                'ideas.$.lastVoteTime': new Date().time
+                                ]
+                ])
     }
 
 }

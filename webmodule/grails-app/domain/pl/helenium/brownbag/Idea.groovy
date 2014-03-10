@@ -14,6 +14,8 @@ class Idea {
 
     Set votes = []
 
+    long lastVoteTime
+
     static constraints = {
         title blank: false
         location blank: false, url: true

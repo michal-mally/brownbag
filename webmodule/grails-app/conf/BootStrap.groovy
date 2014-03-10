@@ -18,7 +18,8 @@ class BootStrap {
                     title: idea.title,
                     location: idea.location,
                     duration: idea.duration,
-                    votes: idea.votes
+                    votes: idea.votes,
+                    lastVoteTime: idea.lastVoteTime
             ]
         }
         JSON.registerObjectMarshaller(UserId) { UserId userId ->

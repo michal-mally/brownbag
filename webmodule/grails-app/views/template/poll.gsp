@@ -1,6 +1,6 @@
 <div class="alert alert-info" ng-show="ideas.length == 0">Nic tu jeszcze nie ma - dodaj śmiało swoje pomysły!</div>
 <ul class="list-group">
-    <li ng-repeat="idea in ideas | orderBy:'votes.length':true | limitTo: ideasShown" class="list-group-item"><a
+    <li ng-repeat="idea in ideas | orderBy:['-votes.length', '+lastVoteTime'] | limitTo: ideasShown" class="list-group-item"><a
             href="" ng-click="voteIdea(idea.id)"
             class="btn btn-success bb-btn-voting"
             ng-disabled="user == null || hasVoted(idea)">{{idea.votes.length}} <span

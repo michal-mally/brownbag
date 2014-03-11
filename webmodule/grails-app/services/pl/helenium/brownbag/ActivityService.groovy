@@ -7,30 +7,31 @@ class ActivityService {
             return
         }
 
-        User.collection.update(
+        UserActivity.collection.update(
                 [
-                        _id                 : user.id,
-                        'pollActivities._id': [$ne: pollId]
+                        _id        : user.id,
+                        'polls._id': [$ne: pollId]
                 ],
                 [
                         $push: [
-                                pollActivities: [
+                                polls: [
                                         _id: pollId,
                                 ]
                         ]
-                ]
+                ],
+                true
         )
-        User.collection.update(
+        UserActivity.collection.update(
                 [
-                        _id                 : user.id,
-                        'pollActivities._id': pollId,
+                        _id        : user.id,
+                        'polls._id': pollId,
                 ],
                 [
                         $set     : [
-                                'pollActivities.$.lastTime': new Date().time,
+                                'polls.$.lastTime': new Date().time,
                         ],
                         $addToSet: [
-                                'pollActivities.$.types': type,
+                                'polls.$.types': type,
                         ]
                 ]
         )

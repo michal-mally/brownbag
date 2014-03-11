@@ -27,8 +27,8 @@ brownbag.service('pollService', function ($http) {
         voteIdea: function (pollId, ideaId) {
             return $http.post(_contextPath + '/poll/voteIdea/' + pollId, {ideaId: ideaId});
         },
-        getPollActivities: function() {
-            return $http.get(_contextPath + '/poll/showPollActivity.json');
+        getUserActivity: function() {
+            return $http.get(_contextPath + '/poll/showUserActivity.json');
         }
     }
 });

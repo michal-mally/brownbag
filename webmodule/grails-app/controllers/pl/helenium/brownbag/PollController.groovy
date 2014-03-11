@@ -13,17 +13,17 @@ class PollController {
     def activityService
 
     def beforeInterceptor = {
-        if (session.user) {
-            log.info "User already in session: $session.user"
+        if (user) {
+            log.info "User already in session: $user"
             return
         }
 
         def userIdCookie = request.getCookie('userId')
         if (userIdCookie) {
             log.info "User id cookie: ${userIdCookie}"
-            def user = User.findByBrownbagId(userIdCookie)
-            if (user) {
-                session.user = user
+            def userByBrownbagId = User.findByBrownbagId(userIdCookie)
+            if (userByBrownbagId) {
+                user = userByBrownbagId
                 return
             } else {
                 response.deleteCookie('userId')
@@ -34,8 +34,8 @@ class PollController {
         Token accessToken = session[oauthService.findSessionKeyForAccessToken('google')]
         if (accessToken) {
             log.info "User not in session but Google Access Token: $accessToken"
-            session.user = authService.registerUser(accessToken.token)
-            response.setCookie('userId', session.user.brownbagId)
+            user = authService.registerUser(accessToken.token)
+            response.setCookie('userId', user.brownbagId)
             return
         }
 
@@ -53,31 +53,39 @@ class PollController {
     }
 
     def create() {
-        def poll = pollService.create(session.user)
-        activityService.recordActivity(session.user, poll.id, 'create')
+        def poll = pollService.create(user)
+        activityService.recordActivity(user, poll.id, 'create')
         respond poll
     }
 
     def show() {
         def poll = Poll.findById(params.id)
-        activityService.recordActivity(session.user, poll.id, 'show')
+        activityService.recordActivity(user, poll.id, 'show')
         respond poll
     }
 
     def createIdea() {
         pollService.createIdea(params.id, new Idea(request.JSON))
-        activityService.recordActivity(session.user, params.id, 'createIdea')
+        activityService.recordActivity(user, params.id, 'createIdea')
         render "OK"
     }
 
     def voteIdea() {
-        pollService.voteIdea(params.id, request.JSON.ideaId, session.user)
-        activityService.recordActivity(session.user, params.id, 'voteIdea')
+        pollService.voteIdea(params.id, request.JSON.ideaId, user)
+        activityService.recordActivity(user, params.id, 'voteIdea')
         render "OK"
     }
 
-    def showPollActivity() {
-        respond User.findById(session.user.id).pollActivities
+    def showUserActivity() {
+        respond UserActivity.findById(user.id)
+    }
+
+    private User getUser() {
+        session.user
+    }
+
+    private void setUser(User user) {
+        session.user = user
     }
 
 }

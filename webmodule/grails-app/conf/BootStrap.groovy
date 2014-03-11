@@ -3,6 +3,7 @@ import pl.helenium.brownbag.Idea
 import pl.helenium.brownbag.Poll
 import pl.helenium.brownbag.PollActivity
 import pl.helenium.brownbag.User
+import pl.helenium.brownbag.UserActivity
 import pl.helenium.brownbag.UserId
 
 class BootStrap {
@@ -36,11 +37,17 @@ class BootStrap {
                     name: userId.name,
             ]
         }
-        JSON.registerObjectMarshaller(PollActivity) { PollActivity activity ->
+        JSON.registerObjectMarshaller(UserActivity) { UserActivity user ->
             [
-                    id      : activity.id,
-                    lastTime: activity.lastTime,
-                    types   : activity.types,
+                    id   : user.id,
+                    polls: user.polls
+            ]
+        }
+        JSON.registerObjectMarshaller(PollActivity) { PollActivity poll ->
+            [
+                    id      : poll.id,
+                    lastTime: poll.lastTime,
+                    types   : poll.types,
             ]
         }
     }

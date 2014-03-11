@@ -5,7 +5,7 @@
     </div>--}%
 
     <ul class="list-group">
-        <li ng-repeat="activity in pollActivities | orderBy:'lastTime':true | limitTo:10" class="list-group-item"><a href="#/{{activity.id}}">{{activity.id}}</a></li>
+        <li ng-repeat="poll in userActivity.polls | orderBy:'lastTime':true | limitTo:10" class="list-group-item"><a href="#/{{poll.id}}">{{poll.id}}</a></li>
     </ul>
 </div>
 

@@ -14,14 +14,6 @@ class User {
 
     String lastname
 
-    Set pollActivities = []
-
-    static hasMany = [
-            pollActivities: PollActivity
-    ]
-
-    static embedded = ['pollActivities']
-
     static mapping = {
         version false
     }

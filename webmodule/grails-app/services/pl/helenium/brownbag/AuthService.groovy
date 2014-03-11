@@ -14,14 +14,13 @@ ${text}"""
                         _id: json.id
                 ],
                 [
-                        $set: [
-                                _id       : json.id,
-                                brownbagId: UUID.randomUUID().toString(),
-                                email     : json.email,
-                                name      : json.name,
-                                firstname : json.given_name,
-                                lastname  : json.family_name,
-                        ]
+                        _id       : json.id,
+                        brownbagId: UUID.randomUUID().toString(),
+                        email     : json.email,
+                        name      : json.name,
+                        firstname : json.given_name,
+                        lastname  : json.family_name,
+
                 ],
                 true
         )

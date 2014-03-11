@@ -4,8 +4,8 @@
 <ul class="list-group">
     <li ng-repeat="idea in poll.ideas | orderBy:['-votes.length', '+lastVoteTime'] | limitTo: ideasShown" class="list-group-item"><a
             href="" ng-click="voteIdea(idea.id)"
-            class="btn btn-success bb-btn-voting"
-            ng-disabled="user == null || hasVoted(idea)">{{idea.votes.length}} <span
+            class="btn btn-{{frozen ? 'default' : 'success'}} bb-btn-voting"
+            ng-disabled="frozen || user == null || hasVoted(idea)">{{idea.votes.length}} <span
                 class="glyphicon glyphicon-thumbs-up"></span></a> <span
             class="bb-shadow">{{idea.title}}</span> <span
             class="label label-info" ng-show="!expanded">{{idea.duration}} min</span>

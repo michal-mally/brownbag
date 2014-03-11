@@ -32,9 +32,10 @@ brownbag.controller('PollListCtrl', function ($scope, $location, authService, po
     }
 });
 
-brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams, pollService, authService) {
+brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams, $timeout, pollService, authService) {
     $scope.ideasShown = 5;
     $scope.pollId = $routeParams.pollId;
+    $scope.frozen = false;
 
     $scope.loadPoll = function () {
         pollService.getPoll($scope.pollId).success(function (data) {
@@ -48,7 +49,9 @@ brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams
 
     $scope.voteIdea = function (ideaId) {
         pollService.voteIdea($scope.pollId, ideaId).success(function (data) {
-            $scope.loadPoll()
+            $scope.loadPoll();
+            $scope.frozen = true;
+            $timeout(function() { $scope.frozen = false }, 700);
         });
     };
 

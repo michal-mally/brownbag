@@ -8,12 +8,28 @@
 </form>
 
 <div ng-show="user" class="panel panel-primary">
-    <div class="panel-heading">Ostatnie głosowania</div>
     %{--<div class="panel-body">
         <p>...</p>
     </div>--}%
 
-    <ul class="list-group">
-        <li ng-repeat="poll in userActivity.polls | orderBy:'lastTime':true | limitTo:10" class="list-group-item"><a href="#/{{poll.id}}">{{poll.name}}</a></li>
-    </ul>
+    <table class="table">
+        <thead class="bg-primary">
+        <tr>
+            <th style="width: 100%">Ostatnie głosowania</th>
+            <th><span class="glyphicon glyphicon-plus"></span></th>
+            <th><span class="glyphicon glyphicon-tags"></span></th>
+            <th><span class="glyphicon glyphicon-thumbs-up"></span></th>
+            <th><span class="glyphicon glyphicon-eye-open"></span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="poll in userActivity.polls | orderBy:'lastTime':true | limitTo:10">
+            <td><a href="#/{{poll.id}}">{{poll.name}}</a></td>
+            <td><span ng-show="hasType(poll, 'create')" class="glyphicon glyphicon-ok"></span></td>
+            <td><span ng-show="hasType(poll, 'createIdea')" class="glyphicon glyphicon-ok"></span></td>
+            <td><span ng-show="hasType(poll, 'voteIdea')" class="glyphicon glyphicon-ok"></span></td>
+            <td><span ng-show="hasType(poll, 'show')" class="glyphicon glyphicon-ok"></span></td>
+        </tr>
+        </tbody>
+    </table>
 </div>

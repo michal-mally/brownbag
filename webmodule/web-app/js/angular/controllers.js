@@ -26,6 +26,10 @@ brownbag.controller('PollListCtrl', function ($scope, $location, authService, po
             $location.path('/' + poll.id);
         });
     };
+
+    $scope.hasType = function (poll, type) {
+        return poll.types.indexOf(type) != -1;
+    }
 });
 
 brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams, pollService, authService) {

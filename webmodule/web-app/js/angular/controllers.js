@@ -32,9 +32,9 @@ brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams
     $scope.ideasShown = 5;
     $scope.pollId = $routeParams.pollId;
 
-    $scope.loadIdeas = function () {
+    $scope.loadPoll = function () {
         pollService.getPoll($scope.pollId).success(function (data) {
-            $scope.ideas = data.ideas;
+            $scope.poll = data;
         });
     };
 
@@ -44,7 +44,7 @@ brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams
 
     $scope.voteIdea = function (ideaId) {
         pollService.voteIdea($scope.pollId, ideaId).success(function (data) {
-            $scope.loadIdeas()
+            $scope.loadPoll()
         });
     };
 
@@ -62,7 +62,7 @@ brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams
         return false;
     };
 
-    $scope.loadIdeas();
+    $scope.loadPoll();
 });
 
 brownbag.controller('IdeaCtrl', function ($scope, $routeParams, $location, pollService) {

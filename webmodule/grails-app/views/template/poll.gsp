@@ -1,6 +1,8 @@
-<div class="alert alert-info" ng-show="ideas.length == 0">Nic tu jeszcze nie ma - dodaj śmiało swoje pomysły!</div>
+<h1 class="bb-shadow text-center">{{poll.name}}</h1>
+
+<div class="alert alert-info" ng-show="poll.ideas.length == 0">Nic tu jeszcze nie ma - dodaj śmiało swoje pomysły!</div>
 <ul class="list-group">
-    <li ng-repeat="idea in ideas | orderBy:['-votes.length', '+lastVoteTime'] | limitTo: ideasShown" class="list-group-item"><a
+    <li ng-repeat="idea in poll.ideas | orderBy:['-votes.length', '+lastVoteTime'] | limitTo: ideasShown" class="list-group-item"><a
             href="" ng-click="voteIdea(idea.id)"
             class="btn btn-success bb-btn-voting"
             ng-disabled="user == null || hasVoted(idea)">{{idea.votes.length}} <span
@@ -17,8 +19,8 @@
 
 <div>
     <div class="alert alert-warning"
-         ng-show="ideasShown < ideas.length">Pokazywanie {{ideasShown}} z {{ideas.length}} elementów</div>
+         ng-show="ideasShown < poll.ideas.length">Pokazywanie {{ideasShown}} z {{poll.ideas.length}} elementów</div>
     <a href="" class="btn btn-success" ng-click="createIdea()" ng-disabled="user == null">Dodaj pomysł...</a>
 
-    <a href="" class="btn btn-info" ng-click="showMore()" ng-disabled="ideasShown >= ideas.length">Pokaż więcej</a>
+    <a href="" class="btn btn-info" ng-click="showMore()" ng-disabled="ideasShown >= poll.ideas.length">Pokaż więcej</a>
 </div>

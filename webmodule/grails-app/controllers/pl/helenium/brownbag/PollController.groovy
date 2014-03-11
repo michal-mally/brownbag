@@ -53,7 +53,10 @@ class PollController {
     }
 
     def create() {
-        def poll = pollService.create(user)
+        def pollName = request.JSON.name
+        assert pollName : "Poll name mustn't be empty!"
+
+        def poll = pollService.createPoll(user, pollName)
         activityService.recordActivity(user, poll.id, 'create')
         respond poll
     }

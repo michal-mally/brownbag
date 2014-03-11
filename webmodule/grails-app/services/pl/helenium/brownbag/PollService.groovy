@@ -2,11 +2,12 @@ package pl.helenium.brownbag
 
 class PollService {
 
-    Poll create(User user) {
+    Poll createPoll(User user, String title) {
         def pollId = UUID.randomUUID().toString()
         Poll.collection.insert(
                 [
                         _id    : pollId,
+                        name   : title,
                         creator: [
                                 _id : user.id,
                                 name: user.name,

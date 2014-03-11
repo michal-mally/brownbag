@@ -4,6 +4,8 @@ class Poll {
 
     String id
 
+    String name
+
     UserId creator
 
     Set ideas = []

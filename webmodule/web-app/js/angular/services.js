@@ -15,8 +15,8 @@ brownbag.service('authService', function ($http) {
 
 brownbag.service('pollService', function ($http) {
     return {
-        createPoll: function() {
-            return $http.post(_contextPath + '/poll/create.json');
+        createPoll: function(poll) {
+            return $http.post(_contextPath + '/poll/create.json', poll);
         },
         getPoll: function (pollId) {
             return $http.get(_contextPath + '/poll/show/' + pollId + '.json');

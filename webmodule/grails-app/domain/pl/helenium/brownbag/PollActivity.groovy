@@ -4,6 +4,8 @@ class PollActivity {
 
     String id
 
+    String name
+
     long lastTime
 
     Set types = []

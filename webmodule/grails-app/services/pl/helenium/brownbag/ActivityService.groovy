@@ -2,7 +2,7 @@ package pl.helenium.brownbag
 
 class ActivityService {
 
-    void recordActivity(User user, String pollId, String type) {
+    void recordActivity(User user, String pollId, String pollName, String type) {
         if (!user) {
             return
         }
@@ -15,7 +15,8 @@ class ActivityService {
                 [
                         $push: [
                                 polls: [
-                                        _id: pollId,
+                                        _id : pollId,
+                                        name: pollName
                                 ]
                         ]
                 ],

@@ -57,25 +57,25 @@ class PollController {
         assert pollName : "Poll name mustn't be empty!"
 
         def poll = pollService.createPoll(user, pollName)
-        activityService.recordActivity(user, poll.id, 'create')
+        activityService.recordActivity(user, poll.id, poll.name, 'create')
         respond poll
     }
 
     def show() {
         def poll = Poll.findById(params.id)
-        activityService.recordActivity(user, poll.id, 'show')
+        activityService.recordActivity(user, poll.id, poll.name, 'show')
         respond poll
     }
 
     def createIdea() {
         pollService.createIdea(params.id, new Idea(request.JSON))
-        activityService.recordActivity(user, params.id, 'createIdea')
+        activityService.recordActivity(user, params.id, null, 'createIdea')
         render "OK"
     }
 
     def voteIdea() {
         pollService.voteIdea(params.id, request.JSON.ideaId, user)
-        activityService.recordActivity(user, params.id, 'voteIdea')
+        activityService.recordActivity(user, params.id, null, 'voteIdea')
         render "OK"
     }
 

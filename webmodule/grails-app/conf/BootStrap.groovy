@@ -47,6 +47,7 @@ class BootStrap {
         JSON.registerObjectMarshaller(PollActivity) { PollActivity poll ->
             [
                     id      : poll.id,
+                    name    : poll.name,
                     lastTime: poll.lastTime,
                     types   : poll.types,
             ]

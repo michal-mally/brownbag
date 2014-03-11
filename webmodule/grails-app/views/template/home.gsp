@@ -8,12 +8,12 @@
 </form>
 
 <div ng-show="user" class="panel panel-primary">
-    <div class="panel-heading">Ostatnia aktywność</div>
+    <div class="panel-heading">Ostatnie głosowania</div>
     %{--<div class="panel-body">
         <p>...</p>
     </div>--}%
 
     <ul class="list-group">
-        <li ng-repeat="poll in userActivity.polls | orderBy:'lastTime':true | limitTo:10" class="list-group-item"><a href="#/{{poll.id}}">{{poll.id}}</a></li>
+        <li ng-repeat="poll in userActivity.polls | orderBy:'lastTime':true | limitTo:10" class="list-group-item"><a href="#/{{poll.id}}">{{poll.name}}</a></li>
     </ul>
 </div>

@@ -39,7 +39,7 @@
     </nav>
     <div class="container">
         <div ng-hide="user" class="alert alert-danger">
-            Zaloguj się by korzystać ze wszystkich funckji aplikacji.
+            Zaloguj się by korzystać ze wszystkich funkcji aplikacji.
         </div>
 
         <g:layoutBody/>

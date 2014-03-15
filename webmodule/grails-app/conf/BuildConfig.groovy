@@ -65,7 +65,7 @@ grails.project.dependency.resolution = {
         // plugins needed at runtime but not for compilation
         // runtime ":hibernate:3.6.10.8" // or ":hibernate4:4.3.1.1"
         // runtime ":database-migration:1.3.8"
-        runtime ":jquery:1.11.0"
+        runtime ":jquery:1.11.0.1"
         runtime ":resources:1.2.7"
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0.1"
@@ -81,8 +81,8 @@ grails.project.dependency.resolution = {
         //compile ":coffee-asset-pipeline:1.5.0"
         //compile ":handlebars-asset-pipeline:1.0.0.3"
 
-        runtime ':twitter-bootstrap:3.1.0'
-        compile ":angularjs-resources:1.2.11"
+        runtime ':twitter-bootstrap:3.1.1'
+        compile ":angularjs-resources:1.2.14"
         compile ':cookie:0.51'
         compile ":mongodb:1.3.3"
         runtime ':oauth:2.2.1'

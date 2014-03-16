@@ -1,4 +1,4 @@
-import org.scribe.builder.api.GoogleApi
+import pl.helenium.brownbag.oauth.two.GoogleApi20
 
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
@@ -119,12 +119,13 @@ log4j = {
 oauth {
     providers {
         google {
-            api = GoogleApi
+            api = GoogleApi20
             key = System.getenv("GOOGLE_OAUTH_KEY")
             secret = System.getenv("GOOGLE_OAUTH_SECRET")
-            scope = 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email'
+            scope = 'profile email'
             callback = "${System.getenv("APP_URL")}/oauth/google/callback"
             successUri = "/"
+            failureuri = "/"
         }
     }
     debug = true

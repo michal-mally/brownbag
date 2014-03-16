@@ -32,8 +32,8 @@ brownbag.controller('PollListCtrl', function ($scope, $location, authService, po
     }
 });
 
-brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams, $timeout, pollService, authService) {
-    $scope.ideasShown = 5;
+brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams, $timeout, pollService) {
+    $scope.ideasShown = 10;
     $scope.pollId = $routeParams.pollId;
     $scope.frozen = false;
 

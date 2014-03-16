@@ -121,7 +121,7 @@ oauth {
             secret = System.getenv("GOOGLE_OAUTH_SECRET")
             scope = 'profile email'
             callback = "${System.getenv("APP_URL")}/oauth/google/callback"
-            successUri = "/"
+            successUri = "/auth/loginCallback"
             failureuri = "/"
         }
     }

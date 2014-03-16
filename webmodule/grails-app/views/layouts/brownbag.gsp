@@ -32,7 +32,7 @@
             <div class="collapse navbar-collapse" id="brownbag-navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-show="user"><a href="" ng-click="logout()">{{user.name}} <span class="glyphicon glyphicon-log-out"></span></a></li>
-                    <li ng-hide="user"><oauth:connect provider="google">Logowanie Google</oauth:connect></li>
+                    <li ng-hide="user"><a href="<g:createLink controller="auth" action="login" id="google" />?redirectUri={{location.path()}}">Logowanie Google</a></li>
                 </ul>
             </div>
         </div>

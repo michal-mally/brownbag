@@ -14,6 +14,15 @@ class AuthController {
         }
     }
 
+    def login() {
+        session.redirectUri = "/#${params.redirectUri}"
+        redirect controller: 'oauth', action: params.id, id: 'authenticate'
+    }
+
+    def loginCallback() {
+        redirect uri: session.redirectUri
+    }
+
     def logout() {
         response.deleteCookie('userId')
         session.invalidate()

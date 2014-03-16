@@ -14,6 +14,14 @@ brownbag.controller('AuthCtrl', function ($scope, authService) {
             $scope.user = null;
         });
     };
+
+    $scope.me = function(user) {
+        return $scope.user.id == user.id;
+    };
+
+    $scope.notMe = function(user) {
+        return $scope.user.id != user.id;
+    };
 });
 
 brownbag.controller('PollListCtrl', function ($scope, $location, authService, pollService) {
@@ -34,6 +42,7 @@ brownbag.controller('PollListCtrl', function ($scope, $location, authService, po
 
 brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams, $timeout, pollService) {
     $scope.ideasShown = 10;
+    $scope.votesShown = 10;
     $scope.pollId = $routeParams.pollId;
     $scope.frozen = false;
 

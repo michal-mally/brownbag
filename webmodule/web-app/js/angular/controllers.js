@@ -64,6 +64,14 @@ brownbag.controller('PollCtrl', function ($scope, $http, $location, $routeParams
         });
     };
 
+    $scope.revokeVote = function (ideaId) {
+        pollService.revokeVote($scope.pollId, ideaId).success(function (data) {
+            $scope.loadPoll();
+            $scope.frozen = true;
+            $timeout(function() { $scope.frozen = false }, 700);
+        });
+    };
+
     $scope.showMore = function () {
         $scope.ideasShown += 5;
     };

@@ -27,6 +27,9 @@ brownbag.service('pollService', function ($http) {
         voteIdea: function (pollId, ideaId) {
             return $http.post('poll/voteIdea/' + pollId, {ideaId: ideaId});
         },
+        revokeVote: function (pollId, ideaId) {
+            return $http.post('poll/revokeVote/' + pollId, {ideaId: ideaId});
+        },
         getUserActivity: function() {
             return $http.get('poll/showUserActivity.json');
         }

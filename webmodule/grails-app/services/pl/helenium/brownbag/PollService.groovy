@@ -51,4 +51,15 @@ class PollService {
                 ])
     }
 
+    void revokeVote(String pollId, String ideaId, User user) {
+        Poll.collection.update(
+                [_id: pollId, 'ideas._id': ideaId],
+                [
+                        $pull: [
+                                'ideas.$.votes': [_id: user.id]
+                        ]
+                ]
+        )
+    }
+
 }

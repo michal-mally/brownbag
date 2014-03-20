@@ -79,6 +79,11 @@ class PollController {
         render "OK"
     }
 
+    def revokeVote() {
+        pollService.revokeVote(params.id, request.JSON.ideaId, user)
+        render "OK"
+    }
+
     def showUserActivity() {
         respond UserActivity.findById(user.id)
     }

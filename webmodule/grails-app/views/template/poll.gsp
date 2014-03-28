@@ -42,7 +42,7 @@
 
                     <div class="col-sm-10">
                         <p class="form-control-static">
-                            <span ng-show="hasVoted(idea)" class="label label-success">Ty</span>
+                            <span ng-show="hasVoted(idea)" class="label label-success">{{user.name}}</span>
                             <span ng-repeat="vote in idea.votes | limitTo:votesShown | filter:notMe" class="label label-info" style="margin-left: 0.25em;">{{vote.name}}</span>
                             <span ng-show="idea.votes.length > votesShown">i {{idea.votes.length - votesShown}} innych</span>
                         </p>

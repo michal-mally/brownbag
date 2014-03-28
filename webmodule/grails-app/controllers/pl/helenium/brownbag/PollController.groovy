@@ -68,7 +68,10 @@ class PollController {
     }
 
     def createIdea() {
-        pollService.createIdea(params.id, new Idea(request.JSON))
+        def idea = new Idea(request.JSON)
+        idea.creator = new UserId(name: user.name)
+        idea.creator.id = user.id
+        pollService.createIdea(params.id, idea)
         activityService.recordActivity(user, params.id, null, 'createIdea')
         render "OK"
     }

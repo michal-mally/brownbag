@@ -27,7 +27,10 @@ class PollService {
                                         title       : idea.title,
                                         location    : idea.location,
                                         duration    : idea.duration,
-                                        creator     : idea.creator,
+                                        creator     : [
+                                                _id : idea.creator.id,
+                                                name: idea.creator.name
+                                        ],
                                         votes       : idea.votes,
                                         lastVoteTime: new Date().time,
                                 ]
